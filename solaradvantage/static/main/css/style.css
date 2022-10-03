@@ -2,10 +2,13 @@
     margin: 0;
     padding: 0;
     background-color: ghostwhite;
-    color: brown;
+}
+
+h1, h2 {
+    color: #FF5C00;
 }
 
 .header {
-    height: 30px;
+    height: 80px;
     width: 100%;
 }
