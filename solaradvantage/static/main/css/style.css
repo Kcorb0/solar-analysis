@@ -1,14 +1,52 @@
+/* Standard tag decoration */
+
 * {
     margin: 0;
     padding: 0;
     background-color: ghostwhite;
+    text-decoration: none;
 }
 
 h1, h2 {
     color: #FF5C00;
 }
 
+a:visited, a:hover, a:link, a:active {
+    color: inherit;
+}
+
+/* Header classes styling */
+
 .header {
-    height: 80px;
+    height: 60px;
     width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+
+.site-name {
+    margin-right: auto;
+    padding-left: 25px;
+}
+
+.account {
+    display: flex;
+    float: right;
+    height: 100%;
+    padding-right: 25px;
+    align-items: center;
+}
+
+.account button {
+    height: 20px;
+    border: 0;
+    color: #FF5C00;
+    cursor: pointer;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.search-area {
+    align-items: center;
 }
