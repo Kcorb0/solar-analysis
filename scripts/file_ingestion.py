@@ -4,9 +4,10 @@ import urllib.request
 import urllib.error
 import ssl
 import sys
+from config import APIKEY
+
 
 BASEURL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/"
-APIKEY = ""
 UNITGROUP = "metric"
 FILETYPE = "csv"
 INTERVAL = "days"
@@ -17,7 +18,7 @@ INTERVAL = "days"
 def get_files(loc, startdate="", enddate=""):
 
     location = str(loc)
-    api_query = BASEURL + location + '?'
+    api_query = BASEURL + location + "?"
 
     if len(UNITGROUP) > 0:
         api_query += "&unitGroup=" + UNITGROUP
@@ -32,7 +33,6 @@ def get_files(loc, startdate="", enddate=""):
 
     print(f"running query for ({api_query})")
 
-
     # Try to return the query output, check that the the
     # query is valid.
     try:
@@ -41,30 +41,32 @@ def get_files(loc, startdate="", enddate=""):
         return info
     except urllib.error.HTTPError as e:
         error_info = e.read().decode()
-        print('Error code: ', e.code, error_info)
+        print("Error code: ", e.code, error_info)
         sys.exit()
     except urllib.error.URLError as e:
         error_info = e.read().decode()
-        print('Error code: ', e.code, error_info)
+        print("Error code: ", e.code, error_info)
         sys.exit()
+
 
 # Used to parse the output data from the api call
 # to a csv format.
-def file_ingestion(file):
-    csv_text = csv.reader(codecs.iterdecode(file, 'utf-8'))
+def file_ingestion(file, slocal=False):
+    csv_text = csv.reader(codecs.iterdecode(file, "utf-8"))
+
     return csv_text
 
+
 if __name__ == "__main__":
-    location = "NewYork"
-    address_full = "46 Victoria Riverside, Leeds"
+    location = "Huddersfield"
     output = get_files(loc=location)
     csv_data = file_ingestion(output)
 
-    path = f'/home/kcorb/Documents/Projects/solar-analysis-test-output/{location}.csv'
-    with open(path, 'w') as f:
+    path = f"C:/Users/Josh/Desktop/{location}.csv"
+    with open(path, "w") as f:
         writer = csv.writer(f)
 
         for i in csv_data:
             writer.writerow(i)
 
-        print(f'Output created for {location}.csv')
+        print(f"Output created for {location}.csv")
