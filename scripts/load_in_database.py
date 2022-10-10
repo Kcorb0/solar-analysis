@@ -1,6 +1,15 @@
+from cgi import test
+import pyodbc
+from config import conn
 
-import mysql.connector
+cursor = conn.cursor()
 
-mydb = mysql.connector.connect()
+test_q = """
+    SELECT TOP (1) * FROM locationdata_full
+"""
 
-def import_data():
+
+cursor.execute(test_q)
+
+for i in cursor:
+    print(i)

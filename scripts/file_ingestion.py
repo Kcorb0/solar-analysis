@@ -5,6 +5,7 @@ import urllib.error
 import ssl
 import sys
 from config import APIKEY
+import pandas as pd
 
 
 BASEURL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/"
@@ -17,8 +18,20 @@ INTERVAL = "days"
 # Note: No start/end date will return the forecast
 def get_files(loc, startdate="", enddate=""):
 
+    """
+    Returns the request data from the visualcrossing api basedon the location and optional start / end dates.
+    Note: No start/end date will return the forecast
+    """
+
     location = str(loc)
-    api_query = BASEURL + location + "?"
+    api_query = BASEURL + location
+
+    if len(startdate) > 0:
+        api_query += "/" + startdate
+        if len(enddate) > 0:
+            api_query += "/" + enddate
+
+    api_query += "?"
 
     if len(UNITGROUP) > 0:
         api_query += "&unitGroup=" + UNITGROUP
@@ -49,24 +62,18 @@ def get_files(loc, startdate="", enddate=""):
         sys.exit()
 
 
-# Used to parse the output data from the api call
-# to a csv format.
-def file_ingestion(file, slocal=False):
+def convert_to_csv(file):
+    """
+    Parse the output data from an api call to comma seperated values.
+    """
     csv_text = csv.reader(codecs.iterdecode(file, "utf-8"))
-
     return csv_text
 
 
 if __name__ == "__main__":
     location = "Huddersfield"
     output = get_files(loc=location)
-    csv_data = file_ingestion(output)
+    csv_data = convert_to_csv(output)
+    # df_data = convert_to_df(output)
 
-    path = f"C:/Users/Josh/Desktop/{location}.csv"
-    with open(path, "w") as f:
-        writer = csv.writer(f)
-
-        for i in csv_data:
-            writer.writerow(i)
-
-        print(f"Output created for {location}.csv")
+    # path = f"C:/Users/Josh/Desktop/{location}2021.csv"
