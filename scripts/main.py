@@ -1,5 +1,6 @@
+from json import load
 from file_ingestion import get_files, convert_to_csv
-
+from load_in_database import load_in_database
 
 if __name__ == "__main__":
 
@@ -11,3 +12,4 @@ if __name__ == "__main__":
     csv_converted = convert_to_csv(files)
 
     ### Load
+    load_in_database(csv_converted)

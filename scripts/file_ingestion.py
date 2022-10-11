@@ -74,6 +74,6 @@ if __name__ == "__main__":
     location = "Huddersfield"
     output = get_files(loc=location)
     csv_data = convert_to_csv(output)
-    # df_data = convert_to_df(output)
 
-    # path = f"C:/Users/Josh/Desktop/{location}2021.csv"
+    for i in csv_data:
+        print(i)
