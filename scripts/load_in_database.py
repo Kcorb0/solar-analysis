@@ -8,7 +8,7 @@ cursor = conn.cursor()
 
 def load_in_database(file):
 
-    params = file[1:]
+    params = list(file)[1:]
 
     insert_values = """
         INSERT INTO full_weatherdata(

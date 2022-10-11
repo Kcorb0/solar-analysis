@@ -2,7 +2,8 @@ from json import load
 from file_ingestion import get_files, convert_to_csv
 from load_in_database import load_in_database
 
-if __name__ == "__main__":
+
+def main():
 
     ### Extract
     location = input("Provide location: ")
@@ -13,3 +14,7 @@ if __name__ == "__main__":
 
     ### Load
     load_in_database(csv_converted)
+
+
+if __name__ == "__main__":
+    main()
