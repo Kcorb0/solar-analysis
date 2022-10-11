@@ -59,7 +59,9 @@ def load_in_database(file):
 
     try:
         cursor.executemany(insert_values, params)
-    except pyodbc: 
-    
+    except pyodbc.DatabaseError as Err:
+        conn.rollback()
     else:
+        conn.commit()
     finally:
+        conn.autocommit = True
