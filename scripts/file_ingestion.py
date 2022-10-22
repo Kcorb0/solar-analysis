@@ -13,9 +13,7 @@ UNITGROUP = "metric"
 FILETYPE = "csv"
 INTERVAL = "days"
 
-# Returns the request data from the visualcrossing api based
-# on the location and optional start / end dates
-# Note: No start/end date will return the forecast
+
 def get_files(loc, startdate="", enddate=""):
 
     """
@@ -68,12 +66,3 @@ def convert_to_csv(file):
     """
     csv_text = csv.reader(codecs.iterdecode(file, "utf-8"))
     return csv_text
-
-
-if __name__ == "__main__":
-    location = "Huddersfield"
-    output = get_files(loc=location)
-    csv_data = convert_to_csv(output)
-
-    for i in csv_data:
-        print(i)
