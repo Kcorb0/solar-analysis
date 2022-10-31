@@ -66,3 +66,5 @@ def convert_to_csv(file):
     """
     csv_text = csv.reader(codecs.iterdecode(file, "utf-8"))
     return csv_text
+
+

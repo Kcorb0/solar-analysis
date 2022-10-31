@@ -1,9 +1,9 @@
 from cgi import test
 import pydoc
 import pyodbc
-from config import conn
+from config import ss_conn, sl_conn
 
-cursor = conn.cursor()
+cursor = ss_conn.cursor()
 
 
 def load_in_database(file):
@@ -60,8 +60,8 @@ def load_in_database(file):
     try:
         cursor.executemany(insert_values, params)
     except pyodbc.DatabaseError as Err:
-        conn.rollback()
+        ss_conn.rollback()
     else:
-        conn.commit()
+        ss_conn.commit()
     finally:
-        conn.autocommit = True
+        ss_conn.autocommit = True
