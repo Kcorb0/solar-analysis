@@ -1,7 +1,7 @@
 from cgi import test
 import pydoc
 import pyodbc
-from config import ss_conn, sl_conn
+from config import ss_conn
 
 cursor = ss_conn.cursor()
 

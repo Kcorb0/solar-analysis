@@ -5,7 +5,6 @@ import urllib.error
 import ssl
 import sys
 from config import APIKEY
-import pandas as pd
 
 
 BASEURL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/"
@@ -66,5 +65,3 @@ def convert_to_csv(file):
     """
     csv_text = csv.reader(codecs.iterdecode(file, "utf-8"))
     return csv_text
-
-
