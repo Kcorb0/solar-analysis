@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import WeatherData
+from .forms import GetDataForm
 import csv
 import codecs
 import urllib.request
@@ -9,7 +10,20 @@ import sys
 
 
 def index(request):
-    context = {}
+
+    data_form = None
+
+    if request.method == "POST":
+        data_form = GetDataForm(request.POST)
+
+        if data_form.is_valid():
+            value = data_form.cleaned_data["location"]
+            load_main(value)
+    else:
+        data_form = GetDataForm()
+
+    context = {"data_form": data_form}
+
     return render(request, "main/index.html", context)
 
 
@@ -121,7 +135,6 @@ def load_in_database(file):
             icon=row[32],
             stations=row[33],
         )
-        created.save()
 
 
 def load_main(location):

@@ -24,8 +24,13 @@
                 <div class="sa-content">
                     <p>CHECK THE LATEST INFORMATION IN YOUR AREA</p>
                     <p class="under-text">Get stats on the solar advantage in your area.</p>
-                    <input placeholder="Enter location e.g. LS10 1EU or Victoria Ave">
-                    <button>GO</button>
+
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ data_form }}
+                        <input type="submit" value="Go">
+                    </form>
+
                 </div>
             </div>
         </div>
