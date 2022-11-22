@@ -139,7 +139,7 @@ def load_in_database(file):
 
 def load_main(location):
     loc_data = get_files(
-        location=location, startdate="2021-06-01", enddate="2021-12-31"
+        location=location, startdate="2020-01-01", enddate="2021-12-31"
     )
     csv_data = convert_to_csv(loc_data)
     load_in_database(csv_data)
