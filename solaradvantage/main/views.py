@@ -89,6 +89,9 @@ def convert_to_csv(file):
 
 
 def load_in_database(file):
+    """
+    This function takes a CSV file format, and loads the data into a SQLite DB by specified column
+    """
 
     params = list(file)[1:]
 
