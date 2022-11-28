@@ -7,6 +7,9 @@ import urllib.request
 import urllib.error
 import ssl
 import sys
+import logging
+
+logging.basicConfig(filename="test.log", level=logging.INFO)
 
 
 def index(request):
@@ -32,6 +35,8 @@ BASEURL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/ser
 UNITGROUP = "metric"
 FILETYPE = "csv"
 INTERVAL = "days"
+START_DATE = "2021-12-25"
+END_DATE = "2021-12-31"
 
 
 def get_files(location, startdate="", enddate=""):
@@ -141,8 +146,21 @@ def load_in_database(file):
 
 
 def load_main(location):
-    loc_data = get_files(
-        location=location, startdate="2020-01-01", enddate="2021-12-31"
+    # Check if location data is alrady available in the database
+
+    if check_exists(location):
+        loc_data = get_files(location=location, startdate=START_DATE, enddate=END_DATE)
+        csv_data = convert_to_csv(loc_data)
+        load_in_database(csv_data)
+    else:
+        logging.info(f"{location} exists in database for date ending {END_DATE}")
+
+
+def check_exists(location):
+    data_check = WeatherData.objects.filter(datetime=END_DATE).filter(
+        name__startswith=location.title()
     )
-    csv_data = convert_to_csv(loc_data)
-    load_in_database(csv_data)
+
+    logging.info(data_check)
+
+    return data_check == []
