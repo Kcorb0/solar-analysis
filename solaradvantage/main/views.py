@@ -157,10 +157,9 @@ def load_main(location):
 
 
 def check_exists(location):
+    """Check to see if data for the given location already exists between the end and start date."""
     data_check = WeatherData.objects.filter(datetime=END_DATE).filter(
         name__startswith=location.title()
     )
-
     logging.info(data_check)
-
     return data_check == []
