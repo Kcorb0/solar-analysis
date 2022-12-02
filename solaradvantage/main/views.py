@@ -30,6 +30,11 @@ def index(request):
     return render(request, "main/index.html", context)
 
 
+def analytics(request):
+    context = {}
+    return render(request, "main/analytics.html", context)
+
+
 APIKEY = ""
 BASEURL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/"
 UNITGROUP = "metric"
