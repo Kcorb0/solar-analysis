@@ -35,7 +35,7 @@ def analytics(request):
     return render(request, "main/analytics.html", context)
 
 
-APIKEY = ""
+APIKEY = "TAPTR7F4N8SKRWXGN4VW88YLJ"
 BASEURL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/"
 UNITGROUP = "metric"
 FILETYPE = "csv"
